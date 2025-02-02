@@ -1,7 +1,7 @@
 #!/bin/bash
 
-USER="user"
-PASSWORD="password"
+USER=${SSH_USER:-user}
+PASSWORD=${SSH_PASSWORD:-password}
 
 service ssh start
 
@@ -12,4 +12,4 @@ IP=$(curl -s ifconfig.me)
 echo "SSH UDP Tunnel Info:"
 echo "$IP:1194@$USER:$PASSWORD"
 
-tail -f /dev/null
+while true; do sleep 1000; done
