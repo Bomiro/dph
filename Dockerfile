@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     iptables \
     socat \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY start.sh /start.sh
