@@ -1,0 +1,29 @@
+name: SSH UDP Tunnel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t ssh-udp-tunnel .
+
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            --name ssh-udp-tunnel \
+            -p 1194:1194/udp \
+            ssh-udp-tunnel
+
+      - name: Print connection info
+        run: |
+          docker logs ssh-udp-tunnel
