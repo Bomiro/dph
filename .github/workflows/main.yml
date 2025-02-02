@@ -22,8 +22,14 @@ jobs:
           docker run -d \
             --name ssh-udp-tunnel \
             -p 1194:1194/udp \
+            -e SSH_USER=${{ secrets.SSH_USER }} \
+            -e SSH_PASSWORD=${{ secrets.SSH_PASSWORD }} \
             ssh-udp-tunnel
 
       - name: Print connection info
         run: |
           docker logs ssh-udp-tunnel
+
+      - name: Check container status
+        run: |
+          docker ps -a
